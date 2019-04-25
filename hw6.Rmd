@@ -82,9 +82,21 @@ ggplot(data=BIS, aes(x=Score,
   xlim((min(BIS$Score)-.2),(max(BIS$Score)+.2))+
   geom_vline( xintercept = 
                  ((max(BIS$Score)-min(BIS$Score))/2)+min(BIS$Score)
-              )
-  
-
+              )+
+  geom_hline(yintercept = 
+               ((max(BIS$Popularity)-min(BIS$Popularity))/2) + min(BIS$Popularity)
+               )+
+  ggtitle("Best in Show: The Ultimate Data Dog")+
+  geom_text_repel(size=1, segment.size = .1) +
+  annotate("text", label = "Inexplicably Overrated", x = 1.1, y = -.1, size = 2, alpha=0.5)+
+  annotate("text", label = "Hot Dogs!", x = 3.5, y = -.1, size = 2, alpha=0.5)+
+  annotate("text", label = "Rightly Ignored", x = 1.1, y = 150, size = 2, alpha=0.5)+
+  annotate("text", label = "Overlooked Treasures", x = 3.5, y =150, size = 2, alpha=0.5)+
+  annotate("text", label = "Our Data Score", x = 1.0, y = 82, size = 2) +
+  annotate("text", label = "Popularity", x = 2.3, y = -.2, size = 2)+
+    theme_void()+
+  theme(panel.background = element_rect(fill = '#f7f1e1', colour = 'grey'))+
+ scale_fill_brewer(palette="Set1")
   
 
 ```
