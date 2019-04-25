@@ -8,9 +8,9 @@ output: html_document
 library('ggplot2')
 library(dplyr)
 library(tidyverse)
-install.packages("ggrepel")
+# install.packages("ggrepel")
 library("ggrepel")
-install.packages('magrittr')
+# install.packages('magrittr')
 library('magrittr')
 ```
 
@@ -49,6 +49,9 @@ names(BIS)[5] <- 'Intelligence'
 # BIS$Intelligence <- as.numeric(BIS$Intelligence)
 names(BIS)[6] <- 'Size'
 BIS$Size %<>% factor
+levels(BIS$Size)
+#They're not in the correct order, let's fix that
+BIS$Size <- factor(BIS$Size, levels=c("small", "medium", "large"))
 
 #Get rid of all na's
 BIS<-na.omit(BIS)
@@ -58,14 +61,31 @@ BIS$Intelligence[BIS$Intelligence < .5] <- "Dumb"
 #Make it factor here bc of our changes
 BIS$Intelligence %<>% factor
 #Let's look at the dataframe now
-head(BIS)
-
+head(BIS) 
 ```
 
+Now that that the DF is much cleaner, let's *attempt to* plot it like the pretty infographic. 
 
 
 ```{r}
 
+
+ggplot(data=BIS, aes(x=Score, 
+                     y= Popularity, 
+                     shape= Intelligence, 
+                     size=Size, 
+                     color=Category, 
+                     label=Breed)
+       )+
+  geom_point(alpha=0.65)+
+  ylim((max(BIS$Popularity)+2),(min(BIS$Popularity))-2)+
+  xlim((min(BIS$Score)-.2),(max(BIS$Score)+.2))+
+  geom_vline( xintercept = 
+                 ((max(BIS$Score)-min(BIS$Score))/2)+min(BIS$Score)
+              )
+  
+
+  
 
 ```
 
