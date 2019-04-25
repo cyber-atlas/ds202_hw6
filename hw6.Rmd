@@ -46,15 +46,28 @@ BIS$Score <- as.numeric(BIS$Score)
 names(BIS)[4] <- 'Popularity'
 BIS$Popularity <- as.numeric(BIS$Popularity)
 names(BIS)[5] <- 'Intelligence'
-BIS$Intelligence <- as.numeric(BIS$Intelligence)
+# BIS$Intelligence <- as.numeric(BIS$Intelligence)
 names(BIS)[6] <- 'Size'
 BIS$Size %<>% factor
 
-head(BIS)
+#Get rid of all na's
+BIS<-na.omit(BIS)
 
+BIS$Intelligence[BIS$Intelligence >= .5] <- "Clever"
+BIS$Intelligence[BIS$Intelligence < .5] <- "Dumb"
+#Make it factor here bc of our changes
+BIS$Intelligence %<>% factor
+#Let's look at the dataframe now
+head(BIS)
 
 ```
 
+
+
+```{r}
+
+
+```
 
 
 
